@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<qualifiedTypeNameHistroy>
+    <fullyQualifiedTypeName name="display.Displays"/>
+    <fullyQualifiedTypeName name="display.Display"/>
+    <fullyQualifiedTypeName name="server.Server"/>
+    <fullyQualifiedTypeName name="displayGui.UpdatedDisplay"/>
+    <fullyQualifiedTypeName name="java.text.DateFormat"/>
+    <fullyQualifiedTypeName name="database.DataAccessObject"/>
+</qualifiedTypeNameHistroy>

@@ -1,0 +1,4 @@
+INDEX VERSION 1.131+D:\UWEC\CS355\help_queue_project\help_queue\.metadata\.plugins\org.eclipse.jdt.core
+2522378686.index
+1671692264.index
+3374725015.index

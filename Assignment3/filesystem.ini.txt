@@ -1,0 +1,41 @@
+pwd
+mkdir bin
+mkdir home
+mkdir tmp
+ls
+cd bin
+mkfile ps 30 "process listing utility”
+mkfile ls 25 file system object listing utility”
+mkfile cat 15 “file content listing utility”
+rm cat
+cd ..
+cd home
+mkdir cs355
+cd cs355
+mkfile prog1 12 “prog1 contents”
+mkfile prog2 27 “prog2 contents”
+cd ..
+mkdir misc
+cd misc
+mkfile resume.doc 38 “my vita”
+mkfile test.txt 5 “test file”
+rm test.txt
+mkdir new
+rmdir new
+cd ..
+cd cs355
+pwd
+mklink prog3 prog2
+cat prog3
+rmlink prog3
+cat prog2
+cd ..
+cd ..
+ls
+cd bin
+rm ps
+cd ..
+du
+cd bin
+cd ~
+pwd

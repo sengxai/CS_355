@@ -1,0 +1,153 @@
+package displayGui;
+
+import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;
+
+import display.Display;
+
+import java.util.*;
+import java.text.SimpleDateFormat;
+import server.Server;
+import java.io.*; 
+import java.net.*; 
+
+public class DisplayView extends JFrame{
+	
+	static JTextArea displayArea = null; //the display of whatever happens i.e clients connecting
+	private Server server = null;
+	static Vector<Display> my =  new Vector<Display>();
+	public DisplayView()
+	{
+		
+		
+		initialize();
+	}
+	
+	private void initialize()
+	{
+		/*
+		 * just to test a sample list
+		 * String client = "c1";
+		String client2 = "c2";
+		
+		Queue<String> myClients = new LinkedList<String>();
+		
+		myClients.add(client);
+		myClients.add(client2);*/
+		
+		
+		/*** Current Time Stamp ***/
+		Date date = new Date();
+		SimpleDateFormat curTime = new SimpleDateFormat("HH:MM:ss");
+		
+		JPanel displayViewContentePane = new JPanel();
+		JLabel title = new JLabel();
+		
+		// set up the application frame
+        setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+        setSize(640, 580);
+        setTitle("Help Queue Display P115 Lab");
+        
+        // construct the title label
+        title.setFont(new Font("Arial", 1, 36));
+        title.setText("Help Queue Display P115 Lab");
+        title.setBounds(13, 21, 600, 31);
+        title.setForeground(Color.blue);
+        title.setHorizontalAlignment(SwingConstants.CENTER);
+        
+        // construct the display view text area
+        displayArea = new JTextArea(10, 35);
+        displayArea.setBounds(30, 100, 550, 400);
+        
+        //Displaying the Jpanel that contains the title and textarea
+        displayViewContentePane.setLayout(null);
+        displayViewContentePane.add(title);
+        displayViewContentePane.add(displayArea);
+        
+        setContentPane(displayViewContentePane);
+        
+        //these are just the formats for the displays
+        //will make the font bigger/bold
+        final String STR_FORMAT = "%8s %17s %20s %20s %n";
+        final String STR_STFF = "%8s %21s %25s %27s %n";
+        
+        displayArea.append(curTime.format(date) + "\n\n");
+        displayArea.append(String.format(STR_FORMAT, "Queue", "WorkStation", "RequestTime", "WaitTime"));
+        
+        //an example of what it would look like
+        displayArea.append(String.format(STR_STFF, "1", "Client1", "##:##:##", "##:##:##"));
+        
+        //from above from the queuelist I was testing it displayed all from the clients
+        //for(String str : myClients)
+       // {
+        //	displayArea.append(str + "\n");
+        //}
+       // displayArea.append(dd.getName() + " " + dd.getTime() + "\n");
+        
+        	//displayArea.append(name + time + "\n");
+        //for(String x: my)
+        	//displayArea.append(x + "\n");
+        setVisible(true); // displays the application
+	}
+	
+	@SuppressWarnings("resource")
+	public static void main(String[] args)throws UnknownHostException, IOException  
+	{
+		       
+        	String Host = "localhost";
+        	InetAddress ip = InetAddress.getByName(Host); 
+            Socket socket = new Socket(ip,1234);
+            ArrayList<String> titleList = new ArrayList<String>();
+            
+            ObjectInputStream objectIn = new ObjectInputStream(socket.getInputStream());
+		
+		
+		
+         // readMessage thread 
+    		Thread readMessage = new Thread(new Runnable()  
+    		{ 
+    			private boolean exit = false;
+    			// private String name;   could new Thread(___, name) above;
+    			
+    			@Override
+    			public void run() { 
+    				while (!exit) {
+    					try { 
+    						// read the message sent to this client 
+    						
+    						Object objRec = objectIn.readObject(); 
+    						my = (Vector<Display>) objRec;
+    						Display xx = (Display) my.get(0);
+    						String zz = xx.getName();
+    						System.out.println(zz);
+    						//String xx = (String) my.get(1);
+    						//displayArea.append(xx);
+    						//for(String aa: my)
+    						//{
+    							//displayArea.append(aa);
+    						//}
+    						//System.out.println(my.get(1).toString());
+    					} catch (IOException e) { 
+    						//System.out.println("Client, read message section - caught exception");
+    						//e.printStackTrace(); 
+    						exit = true;
+    					} catch (ClassNotFoundException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						} 
+    				}	// end - while true 
+    				System.out.println("Client, thread readMessage - run(), after while loop");
+    			}	// end - method run
+    		});	// end - thread readMessage
+
+    		readMessage.start(); 
+		
+		
+		//Server sv = new Server();
+		DisplayView dv = new DisplayView();
+		
+	}
+	
+	
+}
