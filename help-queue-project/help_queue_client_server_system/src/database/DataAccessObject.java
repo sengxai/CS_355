@@ -26,7 +26,7 @@ public class DataAccessObject {
 		// --- 2) connect to database
 		try {
 		   daoConn = DriverManager.getConnection(
-		   "jdbc:oracle:thin:@alfred.cs.uwec.edu:1521:csdev",user,pass);
+		   "jdbc:oracle:thin:@host:1521:ddddev",user,pass);
 		   }
 		catch (SQLException sqle) {
 		   System.err.println ("Could not make connection to database");
