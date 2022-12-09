@@ -12,8 +12,8 @@ public class DataAccessObject {
 	// --- connect() - connect to the Oracle database
 	public void connect() {
 		// --- set the username and password
-		String user = "yangsx7908";	
-		String pass = "JSRED6EG"; 
+		String user = "####";	
+		String pass = "####"; 
 		
 		// --- 1) get the Class object for the driver 
 		try {
